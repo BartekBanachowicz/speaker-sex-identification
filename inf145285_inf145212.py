@@ -1,9 +1,8 @@
 # Python script to detect speaker sex.
-# Script get filepath from input and return 'K' when female voice or 'M' when male voice e.g.:
+# Script gets relative filepath from input and returns 'K' when female voice or 'M' when male voice e.g.:
 # python inf145285_inf145212.py training/001_K.wav
 # ------------------------------------------------
 
-from __future__ import division
 import numpy as np
 from os.path import isfile, join, dirname
 import librosa
