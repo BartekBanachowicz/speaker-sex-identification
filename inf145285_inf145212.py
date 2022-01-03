@@ -35,14 +35,19 @@ def recognize(file_path):
 if __name__ == '__main__':
 
     if len(sys.argv) > 1:
+
         path = join(dirname(__file__), sys.argv[1])
 
         if isfile(path):
-            result = recognize(path)
 
-            if result in ('K', 'M'):
-                correct_output = True
+            try:
+                result = recognize(path)
+                if result in ('K', 'M'):
+                    correct_output = True
                 print(result)
+
+            except:
+                correct_output = False
 
     if not correct_output:
         print('K')

@@ -14,6 +14,8 @@ def recognize(file_path):
     audio_signal, sampling_rate = librosa.load(file_path)
     f0, voiced_flag, voiced_probs = librosa.pyin(audio_signal, fmin=70, fmax=300)
 
+    print("File: ", file_path)
+
     f0 = f0[~np.isnan(f0)]
     if len(f0) == 0:
         f0_mean = 0
@@ -26,12 +28,13 @@ def recognize(file_path):
     else:
         sex = "M"
 
+    print("Answer: ", sex)
     return sex
 
 
 def check_if_correct(path, result):
     pattern = re.compile(".+M.+")
-    sex = "F"
+    sex = "K"
     if pattern.match(basename(path)):
         sex = "M"
     print("Correct answer:", sex)
@@ -54,9 +57,6 @@ def check_sex(path):
 
 if __name__ == '__main__':
     path = join(dirname(__file__), sys.argv[1])
-
-    result = recognize(path)
-    print(result)
 
     male = []
     female = []
