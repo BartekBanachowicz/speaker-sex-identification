@@ -9,6 +9,7 @@ import re
 import librosa
 import sys
 
+
 def recognize(file_path):
     audio_signal, sampling_rate = librosa.load(file_path)
     f0, voiced_flag, voiced_probs = librosa.pyin(audio_signal, fmin=70, fmax=300)
@@ -18,6 +19,7 @@ def recognize(file_path):
         f0_mean = 0
     else:
         f0_mean = sum(f0) / len(f0)
+        print("f0 mean: ", f0_mean)
 
     if f0_mean > 170:
         sex = "K"
@@ -25,6 +27,7 @@ def recognize(file_path):
         sex = "M"
 
     return sex
+
 
 def check_if_correct(path, result):
     pattern = re.compile(".+M.+")
@@ -39,6 +42,7 @@ def check_if_correct(path, result):
     else:
         print("FAIL\n")
         return 0
+
 
 def check_sex(path):
     pattern = re.compile(".+M.+")
@@ -71,7 +75,7 @@ if __name__ == '__main__':
             #     elif sex == 'M':
             #         male.append(mean)
 
-        print("{}/{} test passed\nSuccess rate: {}%\n".format(success_count, n, success_count/n*100))
+        print("{}/{} test passed\nSuccess rate: {}%\n".format(success_count, n, success_count / n * 100))
         # print(f"FEMALE\n\tmean: {sum(female)/len(female)}\n\tmin: {min(female)}\n\tmax: {max(female)}")
         # print(f"FEMALE\n\tmean: {sum(male)/len(male)}\n\tmin: {min(male)}\n\tmax: {max(male)}")
 
